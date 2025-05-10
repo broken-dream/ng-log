@@ -59,10 +59,11 @@ TEST(CleanImmediately, logging) {
   nglog::SetLogFilenameExtension(".foobar");
   nglog::EnableLogCleaner(0h);
 
-  for (unsigned i = 0; i < 1000; ++i) {
+  for (unsigned i = 0; i < 5; ++i) {
+    sleep(2);
     LOG(INFO) << "cleanup test";
-    LOG(WARNING) << "cleanup test";
-    LOG(ERROR) << "cleanup test";
+    LOG(WARNING) << "warning";
+    LOG(ERROR) << "error";
   }
 
   nglog::DisableLogCleaner();
@@ -71,6 +72,7 @@ TEST(CleanImmediately, logging) {
 int main(int argc, char** argv) {
   FLAGS_colorlogtostderr = false;
   FLAGS_timestamp_in_logfile_name = true;
+  FLAGS_logcleansecs = 1;
 #ifdef NGLOG_USE_GFLAGS
   ParseCommandLineFlags(&argc, &argv, true);
 #endif
