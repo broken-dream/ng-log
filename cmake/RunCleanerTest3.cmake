@@ -18,9 +18,8 @@ list (LENGTH LOG_FILES NUM_FILES)
 if (WIN32)
   # On Windows open files cannot be removed and will result in a permission
   # denied error while unlinking such file. Therefore, the last file will be
-  # retained. Current clean test includes three levels (INFO, WARNING, ERROR),
-  # so _expected is set to 3
-  set (_expected 3)
+  # retained.
+  set (_expected 1)
  else (WIN32)
   set (_expected 0)
 endif (WIN32)
